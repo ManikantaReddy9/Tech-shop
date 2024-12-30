@@ -5,6 +5,11 @@ function truncatewords(str,numWords){
     }
     return words.slice(0,numWords).join('')+'...';
 }
+
+function normalizeCategory(category) {
+    return category.toLowerCase().replace(/['\s]+/g, '-');
+}
+
 fetch("https://fakestoreapi.com/products")
 .then((Response)=>{return Response.json()})
 .then((data)=>{
@@ -13,9 +18,10 @@ fetch("https://fakestoreapi.com/products")
         console.log(product);
         const truncateDescription=truncatewords(product.description,60);
         const truncateTitle=truncatewords(product.title,15);
+        const normalizedCategory = normalizeCategory(product.category);
         return(
             `
-            <div class="product-card">
+            <div class="product-card ${normalizedCategory}">
                 <div class="product-card2">
                 <img class="product-image" src="${product.image}" alt="${product.name}">
                 <p class="product-title">${truncateTitle}</p>
@@ -37,5 +43,22 @@ fetch("https://fakestoreapi.com/products")
 }).catch((Error)=>{
     console.log(Error);
 });
+
+function filteritems(category){
+    const items=document.querySelectorAll('.product-card');
+    items.forEach(item=>{
+        if(category==='all'||item.classList.contains(category)){
+            item.style.display='block';
+        }
+        else{
+            item.style.display='none';
+        }
+    });
+}
+
+
+
+
+
 
 

@@ -156,3 +156,13 @@
     padding: 10px;
     padding-bottom: 20px;
 }
+.end{
+    text-align: center;
+    font-size: 25px;
+}
+.end u{
+    font-size: 30px;
+}
+.end .heart{
+    color: red;
+}
