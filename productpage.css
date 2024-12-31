@@ -27,6 +27,14 @@
     color: black;
     cursor: pointer;
 }
+.login:hover{
+    background-color: black;
+    color: white;
+}
+.i2:hover{
+    background-color:  rgb(17, 15, 15);
+    color: white;
+}
 .register{
     border: 1px solid;
     border-radius: 4px;
@@ -35,12 +43,20 @@
     color: black;
     cursor: pointer;
 }
+.register:hover{
+    background-color: rgb(14, 13, 13);
+    color: white;
+}
 .cart{
     border: 1px solid;
     border-radius: 4px;
     padding: 15px;
     color: black;
     cursor: pointer;
+}
+.cart:hover{
+    background-color: black;
+    color: white;
 }
 .commerce{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,49 +69,8 @@
     font-weight: 500;
     color: rgb(77, 73, 73);
 }
-.login:hover{
-    background-color: black;
-    color: white;
-}
-.i2:hover{
-    background-color:  rgb(17, 15, 15);
-    color: white;
-}
-.register:hover{
-    background-color: rgb(14, 13, 13);
-    color: white;
-}
-.cart:hover{
-    background-color: black;
-    color: white;
-}
 header{
-    background-color: rgb(248, 245, 245);
-}
-.image-div{
-    padding: 30px;
-    padding-top: 10px;
-}
-.image-div img{
-    width: 100%;
-    border-radius: 10px;
-}
-.season{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 50px;
-    font-weight: 200;
-    color: antiquewhite;
-    position:absolute;
-    top: 330px;
-    right: 1000px;
-}
-.pre{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: antiquewhite;
-    position: absolute;
-    top: 410px;
-    right: 85px;
-    font-size: 29px;
+    background-color: rgb(250, 249, 249);
 }
 .latest{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -108,7 +83,7 @@ header{
     padding-right: 50px;
 }
 .line hr{
-    height: 2px;
+    height: 1.5px;
     border: none;
     background-color: black;
 }
