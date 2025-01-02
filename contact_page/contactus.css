@@ -142,7 +142,7 @@ form input{
     font-size: 25px;
 }
 .end .heart{
-    color: red;
+    color: rgb(242, 9, 9);
 }
 input:focus{
     border: 3px solid rgb(61, 61, 189);
