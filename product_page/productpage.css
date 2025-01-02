@@ -70,7 +70,7 @@
     color: rgb(77, 73, 73);
 }
 header{
-    background-color: rgb(250, 249, 249);
+    background-color: rgb(235, 232, 232);
 }
 .latest{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -172,5 +172,5 @@ header{
 }
 .commerce a{
     text-decoration: none;
-    color: rgb(84, 80, 80);
+    color: rgb(77, 73, 73);
 }
