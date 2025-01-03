@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./register.css">
 
 </head>
 <body>
@@ -21,8 +21,8 @@
                 <h3><a href="../contact_page/contactus.html">Contact</a></h3>
             </div>
             <div>
-                <i class="fw-semibold fa-solid fa-arrow-right-to-bracket login"><i class="i2"> Login</i></i>
-                <i class="fa-solid fa-user-plus register"><i class="i2"><a class="i2" href="../register_page/register.html"> Register</a></i></i>
+                <i class="fw-semibold fa-solid fa-arrow-right-to-bracket login"><i class="i2"><a class="i2" href="../login_page/login.html"> Login</a></i></i>
+                <i class="fa-solid fa-user-plus register"><i class="i2"> Register</i></i>
                 <i class="fa-sharp fa-solid fa-cart-shopping cart"><i class="i2"> Cart(0)</i></i>
             </div>
         </div>
@@ -30,16 +30,15 @@
     <div>
         <form>
             <center>
+                <label class="lname">Full Name</label><br><br>
+                <input class="name" type="text" placeholder="Enter Your Name"><br><br>
                 <label class="lemail">Email address</label><br><br>
                 <input class="name" type="text" placeholder="name@example.com"><br><br>
                 <label class="lpassword">Password</label><br><br>
                 <input class="password" type="text" placeholder="Password"><br><br>
-                <span class="new">New Here? <a class="reg" href="../register_page/register.html"> Register</a></span><br><br>
-                <button class="llogin">Login</button>
+                <label class="new">Already has an account? <a href="../login_page/login.html">Login</a></label><br><br>
+                <button class="lregister">Register</button>
             </center>
         </form>
     </div><br><br><br>
-    <footer class="end">
-        <span>Made with <i class="fa-solid fa-heart heart"></i> by <u>Manikanta Reddy</u></span>
-    </footer><br><br>
 </body>
