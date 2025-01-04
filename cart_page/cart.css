@@ -81,44 +81,36 @@ header{
     text-decoration: none;
     color: rgb(77, 73, 73);
 }
-form label{
-    font-size: 24px;
-    margin-top: -5px;
+.ccart{
+    text-align: center;
 }
-form span{
-    font-size: 24px;
-    margin-top: -5px;
+.line{
+    padding-left: 60px;
+    padding-right: 60px;
 }
-.lemail{
-    position: relative;
-    right: 140px;
-}
-form input{
-    font-size: 24px;
-    border-radius: 8px;
-    border: 2px solid rgb(159, 156, 156);
-    padding: 10px;
-    width: 420px;
-    height: 55px;
-    margin-top: -10px;
-    outline: none;
-}
-.lpassword{
-    position: relative;
-    right: 160px;
-}
-.llogin{
-    font-size: 24px;
-    padding: 8px 20px 8px 20px;
-    background-color: rgb(88, 87, 87);
-    color: antiquewhite;
-    border-radius: 8px;
+.line hr{
+    height: 2px;
     border: none;
-    margin-top: 15px;
+    background-color: black;
 }
-.new{
-    position: relative;
-    right: 100px;
+.empty{
+    font-weight: 350;
+}
+.container3 button{
+    padding: 6px;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 20px;
+}
+.left{
+    font-size: 20px;
+    font-weight:bolder;
+}
+.container3{
+    text-align: center;
+    background-color: rgb(248, 245, 245);
+    margin-left: 60px;
+    margin-right: 60px;
 }
 .end{
     text-align: center;
@@ -129,11 +121,4 @@ form input{
 }
 .end .heart{
     color: rgb(242, 9, 9);
-}
-input:focus{
-    border: 3px solid rgb(61, 61, 189);
-}
-.reg{
-    font-size: 24px;
-
 }
