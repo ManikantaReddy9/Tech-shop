@@ -9,6 +9,30 @@ function truncatewords(str,numWords){
 function normalizeCategory(category) {
     return category.toLowerCase().replace(/['\s]+/g, '-');
 }
+function getCartItems() {
+    return JSON.parse(localStorage.getItem('cartItems')) || [];
+}
+
+function saveCartItems(cartItems) {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+function addToCart(product) {
+    const cartItems = getCartItems();
+    cartItems.push(product);
+    saveCartItems(cartItems);
+
+    updateCartCount();
+    alert("Item added to cart!");
+}
+
+function updateCartCount() {
+    const cartItems = getCartItems();
+    const cartCount = cartItems.length;
+    document.querySelector('.cart').innerHTML = `<a class="i2" href="../cart_page/cart.html">Cart(${cartCount})</a>`;
+}
+
+updateCartCount();
 
 fetch("https://fakestoreapi.com/products")
 .then((Response)=>{return Response.json()})
@@ -31,8 +55,8 @@ fetch("https://fakestoreapi.com/products")
                 <p class="product-price">$${product.price}</p>
                 <hr>
                 <div class="buttons">
-                    <button>Details</button>
-                    <button>Add to Cart</button>
+                    <button onclick="showDetails(${encodeURIComponent(JSON.stringify(product))})">Details</button>
+                    <button onclick="addToCart('${encodeURIComponent(JSON.stringify(product))}')">Add to Cart</button>
                 </div>
             </div>
             `
