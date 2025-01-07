@@ -2,34 +2,35 @@ document.getElementById('cbtn').addEventListener('click',()=>{
     window.location.href='../home_page/homePage.html'
 });
 
-function displayCartItems() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+function loadCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const container = document.querySelector('.container3');
-
-    if (cartItems.length === 0) {
+    if (cart.length === 0) {
         container.innerHTML = `
-            <h1 class="empty">Your Cart is Empty</h1><br>
-            <button class="button" id="cbtn"><i class="fa-solid fa-arrow-left left"></i> Continue Shopping</button>
+            <h1 class="empty">Your Cart is Empty</h1>
+            <button class="button" id="cbtn">
+                <i class="fa-solid fa-arrow-left left"></i> Continue Shopping
+            </button>
         `;
     } else {
-        container.innerHTML = `
-            <div class="cart-items">
-                ${cartItems
-                    .map(
-                        (item) => `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-title">${item.title}</p>
-                            <p class="cart-item-price">$${item.price}</p>
-                        </div>
-                        <button class="remove-item" onclick='removeFromCart(${JSON.stringify(item)})'>Remove</button>
-                    </div>
-                `
-                    )
-                    .join('')}
+        let cartItemsHTML = cart.map((product, index) => `
+            <div class="cart-item">
+                <img src="${product.image}" alt="${product.title}" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h3>${product.title}</h3>
+                    <p>$${product.price}</p>
+                    <button onclick="removeFromCart(${index})">Remove</button>
+                </div>
             </div>
+        `).join('');
+
+        cartItemsHTML += `
+            <button class="button" id="cbtn">
+                <i class="fa-solid fa-arrow-left left"></i> Continue Shopping
+            </button>
         `;
+
+        container.innerHTML = cartItemsHTML;
     }
 
     document.getElementById('cbtn').addEventListener('click', () => {
@@ -37,12 +38,23 @@ function displayCartItems() {
     });
 }
 
-function removeFromCart(itemToRemove) {
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    cartItems = cartItems.filter((item) => item.id !== itemToRemove.id);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    displayCartItems(); 
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart)); 
+    loadCartItems(); 
     updateCartCount();
 }
 
-displayCartItems();
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.length;
+    document.querySelector('.cart').innerHTML = `
+        <i class="i2"> Cart(${cartCount})</i>
+    `;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCartItems();
+    updateCartCount();
+});

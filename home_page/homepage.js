@@ -1,88 +1,89 @@
-function truncatewords(str,numWords){
-    const words= str.split('');
-    if(words.length<=numWords){
+let productData = [];
+
+function truncatewords(str, numWords) {
+    const words = str.split('');
+    if (words.length <= numWords) {
         return str;
     }
-    return words.slice(0,numWords).join('')+'...';
+    return words.slice(0, numWords).join('') + '...';
 }
 
 function normalizeCategory(category) {
-    return category.toLowerCase().replace(/['\s]+/g, '-');
-}
-function getCartItems() {
-    return JSON.parse(localStorage.getItem('cartItems')) || [];
+    return category.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-');
 }
 
-function saveCartItems(cartItems) {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => {
+        productData = data; 
+
+        const containersCards = productData.map((product) => {
+            const truncateDescription = truncatewords(product.description, 60);
+            const truncateTitle = truncatewords(product.title, 15);
+
+            const normalizedCategory = normalizeCategory(product.category);
+
+            return `
+                <div class="product-card ${normalizedCategory}">
+                    <div class="product-card2">
+                        <img class="product-image" src="${product.image}" alt="${product.title}">
+                        <p class="product-title">${truncateTitle}</p>
+                        <p class="product-description">${truncateDescription}</p>
+                    </div>
+                    <hr>
+                    <p class="product-price">$${product.price}</p>
+                    <hr>
+                    <div class="buttons">
+                        <button onclick="showDetails(${product.id})">Details</button>
+                        <button onclick='addToCart(${product.id})'>Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        const container = document.getElementById("container");
+        container.innerHTML = containersCards.join('');
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+function filteritems(category) {
+    const items = document.querySelectorAll('.product-card');
+    const normalizedCategory = normalizeCategory(category);
+
+    items.forEach((item) => {
+        const itemCategory = item.classList[1];
+        if (category === 'all' || itemCategory === normalizedCategory) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
 
-function addToCart(product) {
-    const cartItems = getCartItems();
-    cartItems.push(product);
-    saveCartItems(cartItems);
+function addToCart(productId) {
+    const product = productData.find((p) => p.id === productId);
+    if (!product) {
+        console.error('Product not found for ID:', productId);
+        return;
+    }
 
+    console.log('Product added to cart:', product);
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
-    alert("Item added to cart!");
 }
 
 function updateCartCount() {
-    const cartItems = getCartItems();
-    const cartCount = cartItems.length;
-    document.querySelector('.cart').innerHTML = `<a class="i2" href="../cart_page/cart.html">Cart(${cartCount})</a>`;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.length;
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = `Cart(${cartCount})`;
+    }
 }
 
-updateCartCount();
-
-fetch("https://fakestoreapi.com/products")
-.then((Response)=>{return Response.json()})
-.then((data)=>{
-    const productData=data;
-    const containersCards=productData.map((product)=>{
-        console.log(product); 
-        const truncateDescription=truncatewords(product.description,60);
-        const truncateTitle=truncatewords(product.title,15);
-        const normalizedCategory = normalizeCategory(product.category);
-        return(
-            `
-            <div class="product-card ${normalizedCategory}">
-                <div class="product-card2">
-                <img class="product-image" src="${product.image}" alt="${product.name}">
-                <p class="product-title">${truncateTitle}</p>
-                <p class="product-description">${truncateDescription}</p>
-                </div>
-                <hr>
-                <p class="product-price">$${product.price}</p>
-                <hr>
-                <div class="buttons">
-                    <button onclick="showDetails(${encodeURIComponent(JSON.stringify(product))})">Details</button>
-                    <button onclick="addToCart('${encodeURIComponent(JSON.stringify(product))}')">Add to Cart</button>
-                </div>
-            </div>
-            `
-        );  
-    });
-    const container=document.getElementById("container");
-    container.innerHTML=containersCards.join("")
-}).catch((Error)=>{
-    console.log(Error);
-});
-
-function filteritems(category){
-    const items=document.querySelectorAll('.product-card');
-    items.forEach(item=>{
-        if(category==='all'||item.classList.contains(category)){
-            item.style.display='block';
-        }
-        else{
-            item.style.display='none';
-        }
-    });
-}
-
-
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', updateCartCount);

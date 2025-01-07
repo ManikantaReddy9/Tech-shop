@@ -58,6 +58,18 @@
     color: rgb(77, 73, 73);
     text-decoration: none;
 }
+.cart-count{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(77, 73, 73);
+    text-decoration: none;
+    margin-left: 6px;
+}
+.cart-count:hover{
+    background-color:  rgb(17, 15, 15);
+    color: white;
+}
 .login:hover{
     background-color: black;
     color: white;
@@ -76,6 +88,8 @@
 }
 header{
     background-color: rgb(248, 245, 245);
+    position: sticky;
+    top: 0;
 }
 .image-div{
     padding: 30px;
