@@ -62,6 +62,7 @@ function filteritems(category) {
     });
 }
 
+
 function addToCart(productId) {
     const product = productData.find((p) => p.id === productId);
     if (!product) {
@@ -72,17 +73,38 @@ function addToCart(productId) {
     console.log('Product added to cart:', product);
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push(product);
+
+    // Check if the product is already in the cart
+    const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+    if (existingProductIndex > -1) {
+        // If product already exists in the cart, increase the quantity
+        cart[existingProductIndex].quantity += 1;
+    } else {
+        // If the product doesn't exist, add it to the cart with quantity = 1
+        product.quantity = 1;  // Set initial quantity to 1
+        cart.push(product);
+    }
+
+    // Save the updated cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update the cart count in the header (unique product count)
     updateCartCount();
 }
 
+
 function updateCartCount() {
+    // Retrieve the cart from localStorage
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartCount = cart.length;
+
+    // Count only the unique products (ignoring quantities)
+    const uniqueProductCount = cart.length;
+
+    // Update the cart icon with the total number of unique products
     const cartCountElement = document.getElementById('cart-count');
     if (cartCountElement) {
-        cartCountElement.textContent = `Cart(${cartCount})`;
+        cartCountElement.textContent = `Cart(${uniqueProductCount})`;  // Update cart count
     }
 }
 
