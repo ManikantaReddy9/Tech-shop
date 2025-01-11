@@ -3,22 +3,20 @@ document.getElementById('cbtn')?.addEventListener('click', () => {
     window.location.href = "../home_page/homePage.html";
 });
 
-// Function to update cart count in the header (total items count)
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log("Cart data:", cart); // Debugging cart data
-    const totalItemCount = cart.length; // Count the total unique items
+    console.log("Cart data:", cart); 
+    const totalItemCount = cart.length; 
     const cartCountElement = document.querySelector('.cart-count');
     if (cartCountElement) {
-        cartCountElement.textContent = `Cart(${totalItemCount})`; // Update cart count
+        cartCountElement.textContent = `Cart(${totalItemCount})`; 
     }
 }
 
-// Function to calculate total amount (products price + shipping)
 function calculateTotalAmount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalPrice = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-    const shippingCost = cart.length > 0 ? 30 : 0; // Shipping cost only if cart is not empty
+    const shippingCost = cart.length > 0 ? 30 : 0;
     const totalAmount = totalPrice + shippingCost;
 
     document.querySelector('#total-price').innerText = `$${totalPrice.toFixed(2)}`;
@@ -26,7 +24,6 @@ function calculateTotalAmount() {
     document.querySelector('.amount .atwo').innerText = `$${totalAmount.toFixed(2)}`;
 }
 
-// Function to load cart items from localStorage and display them
 function loadCartItems() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     console.log("Cart loaded:", cart); // Debugging cart data
@@ -88,41 +85,37 @@ function loadCartItems() {
         container.innerHTML = cartItemsHTML;
     }
 
-    calculateTotalAmount(); // Calculate total amount
-    updateCartCount(); // Update cart count
+    calculateTotalAmount(); 
+    updateCartCount();
 }
 
-// Function to remove an item from the cart
 function removeFromCart(index) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1); // Remove the item at the given index
-    localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
+    cart.splice(index, 1); 
+    localStorage.setItem('cart', JSON.stringify(cart)); 
 
-    // Reload the cart items and update the cart count
-    loadCartItems(); // Reload the cart items
-    updateCartCount(); // Update the cart count in the header
+    loadCartItems(); 
+    updateCartCount(); 
 }
 
 
-// Function to update the quantity of a specific item
 function updateQuantity(index, change) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (!cart[index].quantity) {
-        cart[index].quantity = 1; // Default to 1 if no quantity exists
+        cart[index].quantity = 1; 
     }
 
     cart[index].quantity += change;
 
     if (cart[index].quantity < 1) {
-        cart.splice(index, 1); // Remove item if quantity is less than 1
+        cart.splice(index, 1); 
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
-    console.log("Cart after quantity update:", cart); // Debugging quantity update
-    loadCartItems(); // Reload the cart items
+    localStorage.setItem('cart', JSON.stringify(cart)); 
+    console.log("Cart after quantity update:", cart); 
+    loadCartItems(); 
 }
 
-// Event listener to load cart items when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    loadCartItems(); // Load cart items from localStorage
+    loadCartItems(); 
 });
