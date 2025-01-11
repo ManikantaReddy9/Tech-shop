@@ -1,4 +1,3 @@
-// Redirect to home page when Continue Shopping is clicked
 document.getElementById('cbtn')?.addEventListener('click', () => {
     window.location.href = "../home_page/homePage.html";
 });
@@ -26,7 +25,7 @@ function calculateTotalAmount() {
 
 function loadCartItems() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log("Cart loaded:", cart); // Debugging cart data
+    console.log("Cart loaded:", cart); 
     const container = document.querySelector('.container3');
 
     if (cart.length === 0) {
