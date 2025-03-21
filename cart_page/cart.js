@@ -1,5 +1,5 @@
 document.getElementById('cbtn')?.addEventListener('click', () => {
-    window.location.href = "../home_page/index.html";
+    window.location.href = "../index.html";
 });
 
 function updateCartCount() {
@@ -32,7 +32,7 @@ function loadCartItems() {
         container.innerHTML = `
             <br><br><br><br>
             <h1 class="empty">Your Cart is Empty</h1>
-            <a href="../home_page/index.html">
+            <a href="../index.html">
                 <button class="button" id="cbtn">
                     <i class="fa-solid fa-arrow-left left"></i> Continue Shopping
                 </button>
